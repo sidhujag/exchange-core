@@ -123,7 +123,7 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
                 deserializeQuery(bytesIn)
                         .flatMap(reportQueriesHandler::handleReport)
                         .ifPresent(res -> {
-                            final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
+                            final NativeBytes<Void> bytes = Bytes.allocateElasticDirect();
                             res.writeMarshallable(bytes);
                             final MatcherTradeEvent binaryEventsChain = eventsHelper.createBinaryEventsChain(cmd.timestamp, section, bytes);
                             UnsafeUtils.appendEventsVolatile(cmd, binaryEventsChain);
@@ -184,7 +184,7 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
     }
 
     public static NativeBytes<Void> serializeObject(WriteBytesMarshallable data, int objectType) {
-        final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
+        final NativeBytes<Void> bytes = Bytes.allocateElasticDirect();
         bytes.writeInt(objectType);
         data.writeMarshallable(bytes);
         return bytes;
