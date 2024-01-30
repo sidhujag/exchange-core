@@ -286,7 +286,6 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.8.1</version>
                         <configuration>
-                            <release>17</release>
                             <compilerArgs>
                                 <arg>--add-exports=java.base/jdk.internal.ref=ALL-UNNAMED</arg>
                                 <arg>--add-exports=java.base/sun.nio.ch=ALL-UNNAMED</arg>
