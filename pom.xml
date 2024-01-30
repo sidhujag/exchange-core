@@ -289,8 +289,6 @@
                             <!--                    <release>16</release>-->
                             <fork>true</fork>
                             <compilerArgs>
-                                <arg>--enable-preview</arg>
-                                <arg>-Xlint:all</arg>
                                 <arg>-J--add-exports=java.base/jdk.internal.ref=ALL-UNNAMED</arg>
                                 <arg>-J--add-exports=java.base/sun.nio.ch=ALL-UNNAMED</arg>
                                 <arg>-J--add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED</arg>
