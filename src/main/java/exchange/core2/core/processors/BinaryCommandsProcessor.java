@@ -32,6 +32,7 @@ import exchange.core2.core.utils.UnsafeUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.openhft.chronicle.bytes.*;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+import net.openhft.chronicle.bytes.NativeBytes;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
