@@ -94,9 +94,14 @@
 
         <!-- OpenHFT -->
         <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>net.openhft</groupId>
             <artifactId>affinity</artifactId>
-            <version>3.2.2</version>
+            <version>3.23.3</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -108,7 +113,7 @@
         <dependency>
             <groupId>net.openhft</groupId>
             <artifactId>chronicle-wire</artifactId>
-            <version>2.19.1</version>
+            <version>2.22.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
