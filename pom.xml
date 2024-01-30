@@ -281,6 +281,44 @@
             </activation>
             <build>
                 <plugins>
+                <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.1</version>
+                        <configuration>
+                            <!--                    <release>16</release>-->
+                            <fork>true</fork>
+                            <compilerArgs>
+                                <arg>--enable-preview</arg>
+                                <arg>-Xlint:all</arg>
+                                <arg>-J--add-exports=java.base/jdk.internal.ref=ALL-UNNAMED</arg>
+                                <arg>-J--add-exports=java.base/sun.nio.ch=ALL-UNNAMED</arg>
+                                <arg>-J--add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED</arg>
+                                <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.lang.reflect=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.io=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.util=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/java.nio=ALL-UNNAMED</arg>
+                                <arg>-J--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</arg>
+                            </compilerArgs>
+                            <!--for unmappable characters in classes-->
+                            <encoding>UTF-8</encoding>
+                            <showDeprecation>true</showDeprecation>
+                            <showWarnings>true</showWarnings>
+                            <!--for lombok annotations to resolve-->
+                            <!--contradictory to maven, intelliJ fails with this-->
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>1.18.24</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
@@ -290,7 +328,7 @@
                     <plugin>
                         <groupId>org.projectlombok</groupId>
                         <artifactId>lombok-maven-plugin</artifactId>
-                        <version>1.18.20.0</version>
+                        <version>1.18.12.0</version>
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
                             <outputDirectory>${delombok.output}</outputDirectory>
