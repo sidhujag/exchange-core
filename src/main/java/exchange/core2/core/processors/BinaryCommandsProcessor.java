@@ -30,12 +30,8 @@ import exchange.core2.core.utils.HashingUtils;
 import exchange.core2.core.utils.SerializationUtils;
 import exchange.core2.core.utils.UnsafeUtils;
 import lombok.extern.slf4j.Slf4j;
+import net.openhft.chronicle.bytes.*;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
-import net.openhft.chronicle.bytes.NativeBytes;
-import net.openhft.chronicle.bytes.BytesIn;
-import net.openhft.chronicle.bytes.BytesOut;
-import net.openhft.chronicle.bytes.WriteBytesMarshallable;
-import net.openhft.chronicle.bytes.Bytes;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -127,16 +123,7 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
                 deserializeQuery(bytesIn)
                         .flatMap(reportQueriesHandler::handleReport)
                         .ifPresent(res -> {
-                            final NativeBytes<Void> bytes;         
-                            try {
-                                bytes = Bytes.allocateElasticDirect(128);
-                            
-                            } catch (Throwable t) {
-                                log.error("Failure during static initialization", t);
-                                throw t;
-                            }
-                              
-                            
+                            final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
                             res.writeMarshallable(bytes);
                             final MatcherTradeEvent binaryEventsChain = eventsHelper.createBinaryEventsChain(cmd.timestamp, section, bytes);
                             UnsafeUtils.appendEventsVolatile(cmd, binaryEventsChain);
@@ -197,14 +184,7 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
     }
 
     public static NativeBytes<Void> serializeObject(WriteBytesMarshallable data, int objectType) {
-        final NativeBytes<Void> bytes;         
-        try {
-            bytes = Bytes.allocateElasticDirect(128);
-        
-        } catch (Throwable t) {
-            log.error("Failure during static initialization", t);
-            throw t;
-        }
+        final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
         bytes.writeInt(objectType);
         data.writeMarshallable(bytes);
         return bytes;
